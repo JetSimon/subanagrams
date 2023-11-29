@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/subanagrams-frontend/static/css/main.bd1c08a6.css",
+    "main.js": "/subanagrams-frontend/static/js/main.7a96374e.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/subanagrams-frontend/static/js/787.9e9f4ffd.chunk.js",
+    "index.html": "/subanagrams-frontend/index.html",
+    "main.bd1c08a6.css.map": "/subanagrams-frontend/static/css/main.bd1c08a6.css.map",
+    "main.7a96374e.js.map": "/subanagrams-frontend/static/js/main.7a96374e.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/subanagrams-frontend/static/js/787.9e9f4ffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd1c08a6.css",
+    "static/js/main.7a96374e.js"
+  ]
+}
