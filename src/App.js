@@ -8,10 +8,12 @@ import HowTo from './components/HowTo.js'
 let data = {'startingWord': 'budgetary', 'solutions': [['gyrate', 'budget', 'grated'], ['retag', 'great', 'terga', 'budge', 'teary', 'gated', 'grate', 'debug', 'targe'], ['tare', 'gude', 'rate', 'geta', 'gate', 'arty', 'tear', 'tray']]}
 
 let currentWord = localStorage.getItem("word");
+let started = localStorage.getItem("started");
 
 if(currentWord == null || currentWord !== data.startingWord) {
   localStorage.setItem("word", data.startingWord);
   localStorage.setItem("guesses", null);
+  started = false;
 }
 
 let allSolutions = new Set();
@@ -23,7 +25,6 @@ for(let i = 0; i < data.solutions.length; i++) {
 }
 
 let guesses = loadGuesses() ?? new Set();
-
 
 let autosubmit = false;
 
@@ -44,6 +45,14 @@ function App() {
 
   const [guess, setGuess] = useState("");
   const [showingHelp, setShowingHelp] = useState(false);
+  const [hasStarted, setHasStarted] = useState(started);
+
+  function startGame() {
+    started = true;
+    setHasStarted(started);
+    localStorage.setItem("started", started);
+    localStorage.setItem("startDateTime", new Date());
+  }
 
   function getLevel() {
     let percentage = guesses.size / allSolutions.size;
@@ -104,20 +113,28 @@ function App() {
   return (
     <div className="App">
       {<HowTo showingHelp={showingHelp} onCloseClicked={() => setShowingHelp(false)}></HowTo>}
-      <div style={{'display':!showingHelp ? "block" : "none"}}>
+      <div style={{'display':!showingHelp && hasStarted? "block" : "none"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
         <Logo></Logo>
         <div>your word is...</div>
         <h1>{data.startingWord}</h1>
         <div className="SolutionBoxHolder">
-          {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
+          {data.solutions.map((words) => <SolutionBox key={words[0].length} guesses={guesses} words={words}></SolutionBox>)}
         </div>
-        <div class="ScoreArea">
+        <div className="ScoreArea">
           <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed</div>
           <div>level: {getLevel()}</div>
         </div>
         <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
         {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
+      </div>
+      <div style={{'display':!showingHelp && !hasStarted? "block" : "none", "height":"100%"}}>
+        <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
+        <Logo></Logo>
+        <div className="MainMenu">
+          <h2>{new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }</h2>
+          <button className="button-4" onClick={startGame}>Begin</button>
+        </div>
       </div>
     </div>
   );

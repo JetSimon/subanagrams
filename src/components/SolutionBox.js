@@ -6,7 +6,7 @@ function SolutionBox(props) {
         <div className="SolutionBox">
             <h3>{props.words[0].length} letter words</h3>
             <div className="WordBoxHolder">
-                {props.words.map((word) => <WordBox guesses={props.guesses} word={word}></WordBox>)}
+                {props.words.map((word) => <WordBox key={word} guesses={props.guesses} word={word}></WordBox>)}
             </div>
         </div>
     )
