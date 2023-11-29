@@ -153,6 +153,11 @@ function App() {
         guesses.add(currentGuess);
         setGuess("");
         saveGuesses();
+
+        if(guesses.size / allSolutions.size >= 1) {
+          pressedGiveUpOnce = true;
+          giveUp();
+        }
       } else {
         shake();
       }
