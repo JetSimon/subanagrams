@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/subanagrams-frontend/static/css/main.3b867e12.css",
-    "main.js": "/subanagrams-frontend/static/js/main.bfb13884.js",
-    "static/js/787.9e9f4ffd.chunk.js": "/subanagrams-frontend/static/js/787.9e9f4ffd.chunk.js",
-    "index.html": "/subanagrams-frontend/index.html",
-    "main.3b867e12.css.map": "/subanagrams-frontend/static/css/main.3b867e12.css.map",
-    "main.bfb13884.js.map": "/subanagrams-frontend/static/js/main.bfb13884.js.map",
-    "787.9e9f4ffd.chunk.js.map": "/subanagrams-frontend/static/js/787.9e9f4ffd.chunk.js.map"
+    "main.css": "/subanagrams/static/css/main.3b867e12.css",
+    "main.js": "/subanagrams/static/js/main.bbd1c5ac.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/subanagrams/static/js/787.9e9f4ffd.chunk.js",
+    "index.html": "/subanagrams/index.html",
+    "main.3b867e12.css.map": "/subanagrams/static/css/main.3b867e12.css.map",
+    "main.bbd1c5ac.js.map": "/subanagrams/static/js/main.bbd1c5ac.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/subanagrams/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3b867e12.css",
-    "static/js/main.bfb13884.js"
+    "static/js/main.bbd1c5ac.js"
   ]
 }
