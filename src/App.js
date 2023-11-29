@@ -19,12 +19,12 @@ function App() {
 
   const [guess, setGuess] = useState("");
 
-  function handleOnKeyUp(e) {
-    if(e.key === "Enter") {
-      if(allSolutions.has(guess)) {
-        guesses.add(guess);
-      }
-      
+  function handleGuess(e) {
+    setGuess(e.target.value);
+    let currentGuess = e.target.value;
+
+    if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
+      guesses.add(currentGuess);
       setGuess("");
     }
   }
@@ -43,7 +43,7 @@ function App() {
         {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
       </div>
       <div>{guesses.size}/{allSolutions.size}</div>
-      <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={(e) => setGuess(e.target.value)}></input>
+      <input placeholder="Enter a guess..." type="text" value={guess} onChange={handleGuess}></input>
     </div>
   );
 }
