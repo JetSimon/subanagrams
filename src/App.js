@@ -15,6 +15,7 @@ for(let i = 0; i < data.solutions.length; i++) {
 }
 
 let guesses = new Set();
+let autosubmit = false;
 
 function App() {
 
@@ -49,8 +50,24 @@ function App() {
     return "beginner";
   }
 
+  function handleOnKeyUp(e) {
+    if(e.key === "Enter") {
+      let currentGuess = e.target.value.toLowerCase();
+
+      if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
+        guesses.add(currentGuess);
+        setGuess("");
+      }
+    }
+  }
+
   function handleGuess(e) {
     setGuess(e.target.value);
+
+    if(!autosubmit) {
+      return;
+    }
+
     let currentGuess = e.target.value.toLowerCase();
 
     if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
@@ -74,8 +91,8 @@ function App() {
           <div>{guesses.size}/{allSolutions.size} subs</div>
           <div>level: {getLevel()}</div>
         </div>
-        <input placeholder="Enter a guess..." type="text" value={guess} onChange={handleGuess}></input>
-        <div className="AutoSubmitInstructions">your guess will be autosubmitted if it is correct</div>
+        <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
+        {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
       </div>
     </div>
   );
