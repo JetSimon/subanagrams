@@ -43,7 +43,7 @@ function App() {
         {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
       </div>
       <div>{guesses.size}/{allSolutions.size}</div>
-      <input type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={(e) => setGuess(e.target.value)}></input>
+      <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={(e) => setGuess(e.target.value)}></input>
     </div>
   );
 }
