@@ -9,6 +9,7 @@ let data = {'startingWord': 'umbellate', 'solutions': [['ballet'], ['label', 'bl
 
 let currentWord = localStorage.getItem("word");
 let started = localStorage.getItem("started");
+let hasPlayed = localStorage.getItem("hasPlayed");
 
 if(currentWord == null || currentWord !== data.startingWord) {
   localStorage.setItem("word", data.startingWord);
@@ -44,7 +45,14 @@ function saveGuesses() {
 function App() {
 
   const [guess, setGuess] = useState("");
-  const [showingHelp, setShowingHelp] = useState(false);
+  const [showingHelp, setShowingHelp] = useState(() => {
+    if(!hasPlayed) {
+      localStorage.setItem("hasPlayed", true);
+      return true;
+    }
+
+    return false;
+  });
   const [hasStarted, setHasStarted] = useState(started);
 
   function startGame() {

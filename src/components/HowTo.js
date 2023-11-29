@@ -7,7 +7,7 @@ function HowTo(props) {
             <div>s<span style={{'backgroundColor':'yellow'}}>ponso</span>rships → <span style={{'backgroundColor':'yellow'}}>ponso</span> → snoop <span style={{'color':'green', 'fontWeight':'boldest'}}>✓</span></div>
             <p>And this is NOT a subanagram, because the letters need to all be from the same chunk of the word:</p>
             <div><span style={{'backgroundColor':'yellow'}}>s</span>ponsorsh<span style={{'backgroundColor':'yellow'}}>ips</span> → <span style={{'backgroundColor':'yellow'}}>s ips</span> → sips <span style={{'color':'red', 'fontWeight':'boldest'}}>✗</span></div>
-            <button className="button-4" onClick={props.onCloseClicked}>Close Help</button>
+            <button className="button-4" onClick={props.onCloseClicked}>Okay</button>
             </div>
         </div>
         
