@@ -29,9 +29,15 @@ function App() {
     }
   }
 
+  function help() {
+    alert("You have to guess subanagrams of the word.\nExample: in the word 'sponsorships' you have the chunk of letters 'ponso' which can be rearranged to subanagram 'snoop'.")
+  }
+
   return (
     <div className="App">
+      <button onClick={help} className="HelpButton">Help</button>
       <Logo></Logo>
+      <div>your word is...</div>
       <h1>{data.startingWord}</h1>
       <div className="SolutionBoxHolder">
         {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}

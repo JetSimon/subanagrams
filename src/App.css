@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  position: relative;
+}
+
+.HelpButton {
+  position: absolute;
+  left:22px;
 }
 
 .App-logo {
