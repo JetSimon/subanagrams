@@ -6,6 +6,14 @@ import Logo from './components/Logo.js'
 import HowTo from './components/HowTo.js'
 
 let data = {'startingWord': 'budgetary', 'solutions': [['gyrate', 'budget', 'grated'], ['retag', 'great', 'terga', 'budge', 'teary', 'gated', 'grate', 'debug', 'targe'], ['tare', 'gude', 'rate', 'geta', 'gate', 'arty', 'tear', 'tray']]}
+
+let currentWord = localStorage.getItem("word");
+
+if(currentWord == null || currentWord !== data.startingWord) {
+  localStorage.setItem("word", data.startingWord);
+  localStorage.setItem("guesses", null);
+}
+
 let allSolutions = new Set();
 
 for(let i = 0; i < data.solutions.length; i++) {
@@ -14,8 +22,23 @@ for(let i = 0; i < data.solutions.length; i++) {
   }
 }
 
-let guesses = new Set();
+let guesses = loadGuesses() ?? new Set();
+
+
 let autosubmit = false;
+
+function loadGuesses() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem("guesses")));
+  }
+  catch {
+    return new Set();
+  }
+}
+
+function saveGuesses() {
+  localStorage.setItem("guesses", JSON.stringify(Array.from(guesses)));
+}
 
 function App() {
 
@@ -57,6 +80,7 @@ function App() {
       if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
         guesses.add(currentGuess);
         setGuess("");
+        saveGuesses();
       }
     }
   }
@@ -73,6 +97,7 @@ function App() {
     if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
       guesses.add(currentGuess);
       setGuess("");
+      saveGuesses();
     }
   }
 
