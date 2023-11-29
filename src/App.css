@@ -50,6 +50,11 @@ body {
   left:16px;
 }
 
+.GiveUpButton {
+  position: absolute !important;
+  right:16px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -92,6 +97,9 @@ body {
 
 @media only screen and (max-width: 800px) {
   
+  .Logo {
+    font-size: x-large!important;
+  }
 
   .SolutionBox {  
     width: 90%!important;

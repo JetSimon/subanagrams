@@ -5,16 +5,21 @@ import SolutionBox from './components/SolutionBox.js'
 import Logo from './components/Logo.js'
 import HowTo from './components/HowTo.js'
 
-let data = {'startingWord': 'umbellate', 'solutions': [['ballet'], ['label', 'blume', 'umbel'], ['late', 'tall', 'bell', 'tela', 'tale', 'tael', 'teal', 'leal']]}
+let data = {'startingWord': 'customize', 'solutions': [['ostium', 'custom'], ['omits', 'moist', 'scout'], ['mots', 'cuts', 'toms', 'omit', 'scut', 'most', 'outs', 'oust']]}
 
 let currentWord = localStorage.getItem("word");
-let started = localStorage.getItem("started");
-let hasPlayed = localStorage.getItem("hasPlayed");
+let started = JSON.parse(localStorage.getItem("started"));
+let hasPlayed = JSON.parse(localStorage.getItem("hasPlayed"));
+let gaveUp = JSON.parse(localStorage.getItem("gaveUp"));
+
+let pressedGiveUpOnce = false;
 
 if(currentWord == null || currentWord !== data.startingWord) {
   localStorage.setItem("word", data.startingWord);
   localStorage.setItem("guesses", null);
+  localStorage.setItem("gaveUp", false);
   started = false;
+  gaveUp = false;
 }
 
 let allSolutions = new Set();
@@ -54,16 +59,38 @@ function App() {
     return false;
   });
   const [hasStarted, setHasStarted] = useState(started);
+  const [hasGivenUp, setHasGivenUp] = useState(gaveUp);
 
   const [isShaking, setShaking] = useState(false);
+
+  const [giveUpText, setGiveUpText] = useState("Give Up");
+  const [shareText, setShareText] = useState("Share Results");
 
   function shake() {
     setShaking(true);
     setTimeout(() => setShaking(false), 100);
   }
 
+  function giveUp() {
+
+    if(!pressedGiveUpOnce) {
+      pressedGiveUpOnce = true;
+      setGiveUpText("Are You Sure?");
+      setTimeout(() => {
+        setGiveUpText("Give Up");
+        pressedGiveUpOnce = false;
+      }, 10000);
+      return;
+    }
+
+    setHasGivenUp(true);
+    localStorage.setItem("gaveUp", true);
+    localStorage.setItem("endDateTime", new Date());
+  }
+
   function startGame() {
     started = true;
+    setHasGivenUp(false);
     setHasStarted(started);
     localStorage.setItem("started", started);
     localStorage.setItem("startDateTime", new Date());
@@ -95,6 +122,27 @@ function App() {
     }
     
     return "beginner";
+  }
+
+  function getShareString() {
+    let results = `Subanagrams ${new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}\n`;
+    for(let i = 0; i < data.solutions.length; i++) {
+      let length = data.solutions[i][0].length;
+      let words = data.solutions[i];
+      results += length + " "
+      for(let j = 0; j < words.length; j++) {
+        let word = words[j];
+        
+        results += guesses.has(word) ? "🟩" : "🟥";
+      }
+      results += "\n";
+    }
+
+    results += guesses.size + " out of " + allSolutions.size + " guessed\nlevel: " + getLevel();
+    results += "\n\nPLAY HERE: " + window.location.href;
+    navigator.clipboard.writeText(results);
+    setShareText("Copied!");
+    setTimeout(() => setShareText("Share Results"), 500);
   }
 
   function handleOnKeyUp(e) {
@@ -132,18 +180,25 @@ function App() {
       {<HowTo showingHelp={showingHelp} onCloseClicked={() => setShowingHelp(false)}></HowTo>}
       <div style={{'display':!showingHelp && hasStarted? "block" : "none"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
+        {!hasGivenUp && <button onClick={giveUp} className="GiveUpButton button-4">{giveUpText}</button>}
         <Logo></Logo>
         <div>your word is...</div>
         <h1>{data.startingWord}</h1>
         <div className="SolutionBoxHolder">
-          {data.solutions.map((words) => <SolutionBox key={words[0].length} guesses={guesses} words={words}></SolutionBox>)}
+          {data.solutions.map((words) => <SolutionBox key={words[0].length} hasGivenUp={hasGivenUp} guesses={guesses} words={words}></SolutionBox>)}
         </div>
         <div className="ScoreArea">
           <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed</div>
           <div>level: {getLevel()}</div>
         </div>
-        <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
-        {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
+        <div style={{"display": hasGivenUp ? "none" : "block"}}>
+          <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
+          {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
+        </div>
+        <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
+          <button className="button-4" onClick={getShareString}>{shareText}</button>
+        </div>
+        
       </div>
       <div style={{'display':!showingHelp && !hasStarted? "block" : "none", "height":"100%"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
