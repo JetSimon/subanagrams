@@ -55,6 +55,13 @@ function App() {
   });
   const [hasStarted, setHasStarted] = useState(started);
 
+  const [isShaking, setShaking] = useState(false);
+
+  function shake() {
+    setShaking(true);
+    setTimeout(() => setShaking(false), 100);
+  }
+
   function startGame() {
     started = true;
     setHasStarted(started);
@@ -98,6 +105,8 @@ function App() {
         guesses.add(currentGuess);
         setGuess("");
         saveGuesses();
+      } else {
+        shake();
       }
     }
   }
@@ -119,7 +128,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className={isShaking ? "App shake" : "App"}>
       {<HowTo showingHelp={showingHelp} onCloseClicked={() => setShowingHelp(false)}></HowTo>}
       <div style={{'display':!showingHelp && hasStarted? "block" : "none"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
