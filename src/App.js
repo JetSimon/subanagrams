@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import {React, useState} from 'react'
+
 import './App.css';
+import SolutionBox from './components/SolutionBox.js'
+import Logo from './components/Logo.js'
+
+let data = {'startingWord': 'budgetary', 'solutions': [['gyrate', 'budget', 'grated'], ['retag', 'great', 'terga', 'budge', 'teary', 'gated', 'grate', 'debug', 'targe'], ['tare', 'gude', 'rate', 'geta', 'gate', 'arty', 'tear', 'tray']]}
+let allSolutions = new Set();
+
+for(let i = 0; i < data.solutions.length; i++) {
+  for(let j = 0; j < data.solutions[i].length; j++) {
+    allSolutions.add(data.solutions[i][j])
+  }
+}
+
+let guesses = new Set();
 
 function App() {
+
+  const [guess, setGuess] = useState("");
+
+  function handleOnKeyUp(e) {
+    if(e.key === "Enter") {
+      if(allSolutions.has(guess)) {
+        guesses.add(guess);
+      }
+      
+      setGuess("");
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Logo></Logo>
+      <h1>{data.startingWord}</h1>
+      <div className="SolutionBoxHolder">
+        {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
+      </div>
+      <div>{guesses.size}/{allSolutions.size}</div>
+      <input type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={(e) => setGuess(e.target.value)}></input>
     </div>
   );
 }

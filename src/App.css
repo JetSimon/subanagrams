@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+.WordBox {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: x-large;
+}
+
+.WordBoxHolder {
+  outline-style: dotted;
+  border-radius: 10px;
+  padding:32px;
+}
+
+.SolutionBoxHolder {
+  display:flex;
+  flex-direction: column;
+}
+
+.SolutionBox {  
+  width: 33%;
+  padding: 16px;
+  margin:auto;
+}
+
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: x-large;
+  margin-top: 16px;
+}
+
+.Logo {
+  font-size: xx-large;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.Logo > span {
+  padding-top:3px;
+  padding-bottom:3px;
+}
