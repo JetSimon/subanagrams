@@ -19,6 +19,34 @@ function App() {
 
   const [guess, setGuess] = useState("");
 
+  function getLevel() {
+    let percentage = guesses.size / allSolutions.size;
+
+    if(percentage >= 1.0) {
+      return "anagramaster";
+    }
+    if(percentage >= 0.90) {
+      return "genius";
+    }
+    if(percentage >= 0.75) {
+      return "smarty";
+    }
+    if(percentage >= 0.5) {
+      return "grammer";
+    }
+    if(percentage >= 0.33) {
+      return "average";
+    }
+    if(percentage >= 0.25) {
+      return "anagram andy";
+    }
+    if(percentage >= 0.10) {
+      return "rookie";
+    }
+    
+    return "beginner";
+  }
+
   function handleGuess(e) {
     setGuess(e.target.value);
     let currentGuess = e.target.value.toLowerCase();
@@ -43,6 +71,7 @@ function App() {
         {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
       </div>
       <div>{guesses.size}/{allSolutions.size}</div>
+      <div>level: {getLevel()}</div>
       <input placeholder="Enter a guess..." type="text" value={guess} onChange={handleGuess}></input>
     </div>
   );
