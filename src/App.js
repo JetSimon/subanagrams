@@ -201,7 +201,7 @@ function App() {
           {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
         </div>
         <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
-          <button className="button-4" onClick={getShareString}>{shareText}</button>
+          <button className="ShareButton button-4" onClick={getShareString}>{shareText}</button>
         </div>
         
       </div>
