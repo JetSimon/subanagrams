@@ -21,7 +21,7 @@ function App() {
 
   function handleGuess(e) {
     setGuess(e.target.value);
-    let currentGuess = e.target.value;
+    let currentGuess = e.target.value.toLowerCase();
 
     if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
       guesses.add(currentGuess);
