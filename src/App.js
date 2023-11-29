@@ -3,6 +3,7 @@ import {React, useState} from 'react'
 import './App.css';
 import SolutionBox from './components/SolutionBox.js'
 import Logo from './components/Logo.js'
+import HowTo from './components/HowTo.js'
 
 let data = {'startingWord': 'budgetary', 'solutions': [['gyrate', 'budget', 'grated'], ['retag', 'great', 'terga', 'budge', 'teary', 'gated', 'grate', 'debug', 'targe'], ['tare', 'gude', 'rate', 'geta', 'gate', 'arty', 'tear', 'tray']]}
 let allSolutions = new Set();
@@ -18,6 +19,7 @@ let guesses = new Set();
 function App() {
 
   const [guess, setGuess] = useState("");
+  const [showingHelp, setShowingHelp] = useState(false);
 
   function getLevel() {
     let percentage = guesses.size / allSolutions.size;
@@ -57,22 +59,24 @@ function App() {
     }
   }
 
-  function help() {
-    alert("You have to guess subanagrams of the word.\nExample: in the word 'sponsorships' you have the chunk of letters 'ponso' which can be rearranged to subanagram 'snoop'.")
-  }
-
   return (
     <div className="App">
-      <button onClick={help} className="HelpButton">Help</button>
-      <Logo></Logo>
-      <div>your word is...</div>
-      <h1>{data.startingWord}</h1>
-      <div className="SolutionBoxHolder">
-        {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
+      {showingHelp && <HowTo onCloseClicked={() => setShowingHelp(false)}></HowTo>}
+      <div style={{'display':!showingHelp ? "block" : "none"}}>
+        <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
+        <Logo></Logo>
+        <div>your word is...</div>
+        <h1>{data.startingWord}</h1>
+        <div className="SolutionBoxHolder">
+          {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
+        </div>
+        <div class="ScoreArea">
+          <div>{guesses.size}/{allSolutions.size} subs</div>
+          <div>level: {getLevel()}</div>
+        </div>
+        <input placeholder="Enter a guess..." type="text" value={guess} onChange={handleGuess}></input>
+        <div className="AutoSubmitInstructions">your guess will be autosubmitted if it is correct</div>
       </div>
-      <div>{guesses.size}/{allSolutions.size}</div>
-      <div>level: {getLevel()}</div>
-      <input placeholder="Enter a guess..." type="text" value={guess} onChange={handleGuess}></input>
     </div>
   );
 }

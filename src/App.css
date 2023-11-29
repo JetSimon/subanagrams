@@ -3,20 +3,38 @@
   position: relative;
 }
 
-.HelpButton {
+body {
+  margin: 0px;
+}
+
+.HowToBackground {
   position: absolute;
-  left:6px;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: #282c34;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.HowTo {
+  width:33%;
+  margin:auto;
+  margin-top:128px;
+  border-radius: 16px;
+  background-color: white;
+  text-align: left;
+  padding:32px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.HowTo > button {
+  margin:auto;
+  display:flex;
+  margin-top:20px;
+}
+
+.HelpButton {
+  position: absolute !important;
+  left:16px;
 }
 
 .App-header {
@@ -30,24 +48,10 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .WordBox {
   display: inline-block;
   margin-left: 5px;
   margin-right: 5px;
-  font-size: x-large;
 }
 
 .WordBoxHolder {
@@ -61,9 +65,33 @@
   flex-direction: column;
 }
 
+.ScoreArea {
+  margin-top:32px;
+  font-weight: bolder;
+}
+
+.AutoSubmitInstructions {
+  font-style: italic;
+  color:grey;
+  font-size: x-small;
+}
+
+@media only screen and (max-width: 600px) {
+  
+
+  .SolutionBox {  
+    width: 90%!important;
+    padding: 0!important;
+  }
+
+  .HowTo {
+    width: 90%!important;
+  }
+}
+
 .SolutionBox {  
   width: 33%;
-  padding: 16px;
+  padding: 8px;
   margin:auto;
 }
 
@@ -76,6 +104,7 @@ input[type=text] {
   box-sizing: border-box;
   font-size: x-large;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .Logo {
@@ -88,4 +117,61 @@ input[type=text] {
 .Logo > span {
   padding-top:3px;
   padding-bottom:3px;
+}
+
+.button-4 {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.button-4:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
 }
