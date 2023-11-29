@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": "https://jetsimon.com/subanagrams-frontend",
+  "homepage": "https://jetsimon.com/subanagrams",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
