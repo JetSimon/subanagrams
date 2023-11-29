@@ -113,7 +113,7 @@ function App() {
           {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
         </div>
         <div class="ScoreArea">
-          <div>{guesses.size}/{allSolutions.size} subs</div>
+          <div>{guesses.size}/{allSolutions.size} guessed</div>
           <div>level: {getLevel()}</div>
         </div>
         <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
