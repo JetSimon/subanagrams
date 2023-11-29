@@ -103,7 +103,7 @@ function App() {
 
   return (
     <div className="App">
-      {showingHelp && <HowTo onCloseClicked={() => setShowingHelp(false)}></HowTo>}
+      {<HowTo showingHelp={showingHelp} onCloseClicked={() => setShowingHelp(false)}></HowTo>}
       <div style={{'display':!showingHelp ? "block" : "none"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
         <Logo></Logo>
@@ -113,7 +113,7 @@ function App() {
           {data.solutions.map((words) => <SolutionBox guesses={guesses} words={words}></SolutionBox>)}
         </div>
         <div class="ScoreArea">
-          <div>{guesses.size}/{allSolutions.size} guessed</div>
+          <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed</div>
           <div>level: {getLevel()}</div>
         </div>
         <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
