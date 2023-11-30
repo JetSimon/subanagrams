@@ -148,7 +148,7 @@ function App() {
   function handleOnKeyUp(e) {
     if(e.key === "Enter") {
 
-      let currentGuess = guess;
+      let currentGuess = guess.toLowerCase();
       if(e.target) {
         currentGuess = e.target.value.toLowerCase();
       }
