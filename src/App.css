@@ -97,6 +97,10 @@ body {
 
 @media only screen and (max-width: 800px) {
   
+  input {
+    width:66%;
+  }
+
   .Logo {
     font-size: x-large!important;
   }
@@ -171,6 +175,50 @@ input[type=text] {
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
+}
+
+.green-button {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px 20px;
+  color:white;
+  font-size: larger;
+  font-weight: bold;
+  background-color: #17c551!important;
+}
+
+.hidden {
+  display:none!important;
+}
+
+.InputArea {
+  display:flex;
+  margin:auto;
+  place-content: center;
+  gap:8px;
+}
+
+.red-button {
+  color:white;
+  font-weight:bold;
+  background-color: #d23333!important;
+}
+
+.red-button:hover {
+  background-color: #ae2727!important;
+}
+
+.red-button:active {
+  background-color: #9e2222!important;
+}
+
+
+.green-button:hover {
+  background-color: #27ae54!important;
+}
+
+.green-button:active {
+  background-color: #229e4c!important;
 }
 
 .button-4:hover {

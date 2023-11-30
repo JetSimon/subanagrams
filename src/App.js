@@ -75,7 +75,7 @@ function App() {
 
     if(!pressedGiveUpOnce) {
       pressedGiveUpOnce = true;
-      setGiveUpText("Are You Sure?");
+      setGiveUpText("For Sure?");
       setTimeout(() => {
         setGiveUpText("Give Up");
         pressedGiveUpOnce = false;
@@ -147,8 +147,12 @@ function App() {
 
   function handleOnKeyUp(e) {
     if(e.key === "Enter") {
-      let currentGuess = e.target.value.toLowerCase();
 
+      let currentGuess = guess;
+      if(e.target) {
+        currentGuess = e.target.value.toLowerCase();
+      }
+      
       if(allSolutions.has(currentGuess) && !guesses.has(currentGuess)) {
         guesses.add(currentGuess);
         setGuess("");
@@ -185,7 +189,7 @@ function App() {
       {<HowTo showingHelp={showingHelp} onCloseClicked={() => setShowingHelp(false)}></HowTo>}
       <div style={{'display':!showingHelp && hasStarted? "block" : "none"}}>
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
-        {!hasGivenUp && <button onClick={giveUp} className="GiveUpButton button-4">{giveUpText}</button>}
+        {!hasGivenUp && <button onClick={giveUp} className="red-button GiveUpButton button-4">{giveUpText}</button>}
         <Logo></Logo>
         <div>your word is...</div>
         <h1>{data.startingWord}</h1>
@@ -196,10 +200,11 @@ function App() {
           <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed</div>
           <div>level: {getLevel()}</div>
         </div>
-        <div style={{"display": hasGivenUp ? "none" : "block"}}>
+        <div className={hasGivenUp ? "InputArea hidden" : "InputArea shown"}>
           <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
-          {<div className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "press enter to submit your guess"}</div>}
+          <button onClick={() => handleOnKeyUp({'key':'Enter'})} className="button-4 green-button">Go</button>
         </div>
+        {<div style={{"display": hasGivenUp ? "none" : "block"}} className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "you can press enter to submit your guess"}</div>}
         <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
           <button className="ShareButton button-4" onClick={getShareString}>{shareText}</button>
         </div>
