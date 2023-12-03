@@ -96,6 +96,40 @@ function App() {
     localStorage.setItem("startDateTime", new Date());
   }
 
+  function getFinalTime() {
+    let start = new Date(localStorage.getItem("startDateTime"));
+    let end = new Date(localStorage.getItem("endDateTime"));
+
+    if(!start || !end) {
+      return "???";
+    }
+
+    let diff = end.getTime() - start.getTime();
+
+    let hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+
+    let mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+
+    let seconds = Math.floor(diff / (1000));
+    diff -= seconds * (1000);
+
+    let res = "";
+
+    if(hours > 0) {
+      res += hours + " hours ";
+    }
+
+    if(mins > 0) {
+      res += mins + " minutes ";
+    }
+
+    res += seconds + " seconds"
+
+    return res;
+  }
+
   function getLevel() {
     let percentage = guesses.size / allSolutions.size;
 
@@ -125,7 +159,7 @@ function App() {
   }
 
   function getShareString() {
-    let results = `Subanagrams ${new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}\n`;
+    let results = `Subanagrams ${new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}\n\n`;
     for(let i = 0; i < data.solutions.length; i++) {
       let length = data.solutions[i][0].length;
       let words = data.solutions[i];
@@ -138,7 +172,8 @@ function App() {
       results += "\n";
     }
 
-    results += guesses.size + " out of " + allSolutions.size + " guessed\nlevel: " + getLevel();
+    results += "\n" + guesses.size + " out of " + allSolutions.size + " guessed\nlevel: " + getLevel();
+    results += "\nplayed for: " + getFinalTime();
     results += "\n\nPLAY HERE: " + window.location.href;
     navigator.clipboard.writeText(results);
     setShareText("Copied!");
@@ -206,6 +241,7 @@ function App() {
         </div>
         {<div style={{"display": hasGivenUp ? "none" : "block"}} className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "you can press enter to submit your guess"}</div>}
         <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
+          <div className="TimeSpent">Played for {getFinalTime()}</div>
           <button className="ShareButton button-4" onClick={getShareString}>{shareText}</button>
         </div>
         

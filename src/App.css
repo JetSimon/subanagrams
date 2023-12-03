@@ -114,11 +114,11 @@ body {
     width: 90%!important;
   }
 
-  .ShareButton {
-    margin-bottom:8px;
-  }
 }
 
+.ShareButton {
+  margin-bottom:8px;
+}
 
 
 .SolutionBox {  
@@ -189,6 +189,12 @@ input[type=text] {
 
 .hidden {
   display:none!important;
+}
+
+.TimeSpent {
+  margin-bottom: 8px;
+  font-size: small;
+  font-style: italic;
 }
 
 .InputArea {
