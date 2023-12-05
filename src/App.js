@@ -5,7 +5,7 @@ import SolutionBox from './components/SolutionBox.js'
 import Logo from './components/Logo.js'
 import HowTo from './components/HowTo.js'
 
-let data = {'startingWord': 'jangles', 'solutions': [['gleans', 'angels', 'angles', 'jangle'], ['genal', 'angel', 'angle', 'lengs', 'glean', 'glens'], ['gels', 'leng', 'glen', 'lang', 'legs']]}//{'startingWord': 'backer', 'solutions': [['reback'], ['caker', 'crake', 'acker', 'creak'], ['cake', 'reck', 'back']]}
+let data = {'startingWord': 'pseudos', 'solutions': [['spoused'], ['soused', 'douses', 'pseudo', 'souped'], ['dupes', 'pseud', 'douse', 'spued'], ['udos', 'ouds', 'sued', 'dues', 'deus', 'spue', 'used', 'supe', 'duos']]}
 
 let currentWord = localStorage.getItem("word");
 let started = JSON.parse(localStorage.getItem("started"));
