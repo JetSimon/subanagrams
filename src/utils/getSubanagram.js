@@ -47,7 +47,7 @@ function getSubanagram() {
             }
         } 
 
-        solutions = solutions.filter((words) => words.length > 0);
+        solutions = solutions.filter((words) => words.length > 0).reverse();
 
         return {
             "startingWord":startingWord,
