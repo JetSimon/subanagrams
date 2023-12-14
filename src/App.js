@@ -228,24 +228,46 @@ function App() {
         <button className="HelpButton button-4" onClick={() => setShowingHelp(true)}>?</button>
         {!hasGivenUp && <button onClick={giveUp} className="red-button GiveUpButton button-4">{giveUpText}</button>}
         <Logo></Logo>
-        <div>your word is...</div>
-        <h1>{data.startingWord}</h1>
         <div className="SolutionBoxHolder">
           {data.solutions.map((words) => <SolutionBox key={words[0].length} hasGivenUp={hasGivenUp} guesses={guesses} words={words}></SolutionBox>)}
         </div>
+        <div style={{"visibility":"hidden"}}>
         <div className="ScoreArea">
-          <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed</div>
-          <div>level: {getLevel()}</div>
+          <div className="WordIs">your word is...</div>
+          <h1>{data.startingWord}</h1>
+          <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed | level: {getLevel()}</div>
         </div>
-        <div className={hasGivenUp ? "InputArea hidden" : "InputArea shown"}>
+        <div className={hasGivenUp ? "hidden" : "shown"}>
+          <div className="InputArea">
           <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
           <button onClick={() => handleOnKeyUp({'key':'Enter'})} className="button-4 green-button">Go</button>
+          </div>
         </div>
         {<div style={{"display": hasGivenUp ? "none" : "block"}} className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "you can press enter to submit your guess"}</div>}
         <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
           <div className="TimeSpent">Played for {getFinalTime()}</div>
           <button className="ShareButton button-4" onClick={getShareString}>{shareText}</button>
         </div>
+        </div>
+        <div className="Pinned">
+        <div className="ScoreArea">
+          <div className="WordIs">your word is...</div>
+          <h1>{data.startingWord}</h1>
+          <div style={{"fontSize":"large", "margin":"5px"}}>{guesses.size}/{allSolutions.size} guessed | level: {getLevel()}</div>
+        </div>
+        <div className={hasGivenUp ? "hidden" : "shown"}>
+          <div className="InputArea">
+          <input placeholder="Enter a guess..." type="text" value={guess} onKeyUp={handleOnKeyUp} onChange={handleGuess}></input>
+          <button onClick={() => handleOnKeyUp({'key':'Enter'})} className="button-4 green-button">Go</button>
+          </div>
+        </div>
+        {<div style={{"display": hasGivenUp ? "none" : "block"}} className="AutoSubmitInstructions">{autosubmit ? "your guess will be autosubmitted if it is correct" : "you can press enter to submit your guess"}</div>}
+        <div style={{"display": hasGivenUp ? "block" : "none", "marginTop":"16px"}} >
+          <div className="TimeSpent">Played for {getFinalTime()}</div>
+          <button className="ShareButton button-4" onClick={getShareString}>{shareText}</button>
+        </div>
+        </div>
+       
         
       </div>
       <div style={{'display':!showingHelp && !hasStarted? "block" : "none", "height":"100%"}}>

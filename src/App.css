@@ -81,6 +81,7 @@ body {
 .SolutionBoxHolder {
   display:flex;
   flex-direction: column;
+  margin-bottom: 5%;
 }
 
 .ScoreArea {
@@ -116,8 +117,17 @@ body {
 
 }
 
+.Pinned {
+  position: fixed;
+  bottom: 0;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  background-color: white;
+  width:100%;
+  outline:1px solid rgba(27, 31, 35, 0.15);
+}
+
 .ShareButton {
-  margin-bottom:8px;
+  margin-bottom:32px;
 }
 
 
@@ -149,6 +159,13 @@ input[type=text] {
 .Logo > span {
   padding-top:3px;
   padding-bottom:3px;
+}
+
+.WordIs {
+  font-size: x-small;
+  margin-bottom: -15px;
+  font-style:italic;
+  color:grey;
 }
 
 .button-4 {
